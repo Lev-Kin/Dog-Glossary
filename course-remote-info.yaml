@@ -3,14 +3,14 @@ hyperskill_project:
   ide_files: https://cogniterra.org/media/attachments/lesson/27478/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: "Tue, 17 Oct 2023 07:50:52 UTC"
+update_date: "Wed, 18 Oct 2023 08:13:50 UTC"
 stages:
   - id: 1806
     step: 26328
     is_completed: true
   - id: 1807
     step: 26329
-    is_completed: false
+    is_completed: true
   - id: 1808
     step: 26330
     is_completed: false
@@ -22,12 +22,12 @@ stages:
     is_completed: false
 topics:
   0:
+    - title: Comments
+      theory_id: 8170
     - title: Block-level elements
       theory_id: 7271
     - title: Inline elements
       theory_id: 7518
-    - title: Comments
-      theory_id: 8170
     - title: What is CSS
       theory_id: 7678
     - title: HTML attributes id and class
@@ -50,12 +50,6 @@ topics:
       theory_id: 23100
     - title: XMLSerializer & DOMParser
       theory_id: 23111
-    - title: HTML basics
-      theory_id: 6434
-    - title: Tags and Attributes
-      theory_id: 7536
-    - title: HTML page structure
-      theory_id: 6491
     - title: Introduction to JavaScript
       theory_id: 8016
     - title: Overview of the basic program
@@ -64,6 +58,12 @@ topics:
       theory_id: 8162
     - title: Variables
       theory_id: 8186
+    - title: HTML basics
+      theory_id: 6434
+    - title: Tags and Attributes
+      theory_id: 7536
+    - title: HTML page structure
+      theory_id: 6491
     - title: Strings and numbers
       theory_id: 8194
     - title: Arithmetic operators
@@ -117,16 +117,14 @@ topics:
       theory_id: 15253
     - title: Input fields and field labels
       theory_id: 15447
+    - title: Naming variables
+      theory_id: 8364
     - title: Intro to HTML forms
       theory_id: 6560
-    - title: Form elements
-      theory_id: 21167
     - title: Input types
       theory_id: 21151
     - title: Input attributes
       theory_id: 21158
-    - title: Naming variables
-      theory_id: 8364
     - title: String transforming
       theory_id: 17779
   2:
