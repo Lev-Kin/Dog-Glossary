@@ -62,3 +62,31 @@ document.getElementById('button-show-sub-breed').addEventListener('click', () =>
             console.error("Error fetching the sub-breeds:", error);
         });
 });
+
+document.getElementById('button-show-all').addEventListener('click', () => {
+    fetch('https://dog.ceo/api/breeds/list/all')
+        .then(response => response.json())
+        .then(data => {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '';
+            const ol = document.createElement('ol');
+            for (const breed in data.message) {
+                const li = document.createElement('li');
+                li.textContent = breed;
+                if (data.message[breed].length > 0) {
+                    const ul = document.createElement('ul');
+                    data.message[breed].forEach(subBreed => {
+                        const subLi = document.createElement('li');
+                        subLi.textContent = subBreed;
+                        ul.appendChild(subLi);
+                    });
+                    li.appendChild(ul);
+                }
+                ol.appendChild(li);
+            }
+            contentDiv.appendChild(ol);
+        })
+        .catch(error => {
+            console.error("Error fetching the breeds:", error);
+        });
+});
