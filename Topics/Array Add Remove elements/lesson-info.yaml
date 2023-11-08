@@ -1,0 +1,9 @@
+custom_name: Array Add/Remove elements
+content:
+  - Theory
+  - The splice() method
+  - The delete operator
+  - Array methods
+  - The push() method
+  - Animals in splice
+  - Delete every second element

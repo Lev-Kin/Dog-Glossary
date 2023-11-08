@@ -1,0 +1,7 @@
+content:
+  - Theory
+  - The right way to clone an object
+  - Spread operator
+  - Using Object.assign()
+  - Object.assign()
+  - Deep copy using spread

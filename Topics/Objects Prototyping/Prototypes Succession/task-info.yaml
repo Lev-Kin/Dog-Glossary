@@ -1,0 +1,19 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: They hold hands and start a game of 'Who Inherits First?'
+  - text: ' Prototype chain is broken.'
+  - text: Prototype properties are deleted.
+  - text: Inheritance becomes recursive.
+  - text: Hierarchical inheritance structure is established.
+files:
+  - name: main.js
+    visible: true
+    text: |+
+      // You can experiment here, it won’t be checked
+    
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30511#comment
+status: Solved
+record: -1
+local_check: false

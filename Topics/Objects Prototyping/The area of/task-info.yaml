@@ -1,0 +1,30 @@
+type: code
+custom_name: The area of...
+files:
+  - name: main.js
+    visible: true
+    text: |-
+      const shape = {
+        height: 5,
+        width: 4,
+        calculateArea() {
+        return 0;
+        }
+      };
+      
+      /* Do not change code above */
+      
+      // write your code here
+      
+      /* Do not change code below */
+      
+      console.log(rectangle.calculateArea());
+      console.log(triangle.calculateArea());
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30517#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Wed, 08 Nov 2023 08:31:31 UTC"
+record: -1
+submission_language: javascript

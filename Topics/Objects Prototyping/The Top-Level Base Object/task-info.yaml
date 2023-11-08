@@ -1,0 +1,19 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: <code>isPrototypeOf</code>
+  - text: <code>proto.Object</code>
+  - text: ' <code>baseObject</code>'
+  - text: <code>Object.prototype</code>
+  - text: <code>hasOwnProperty</code>
+files:
+  - name: main.js
+    visible: true
+    text: |+
+      // You can experiment here, it won’t be checked
+    
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30508#comment
+status: Solved
+record: -1
+local_check: false

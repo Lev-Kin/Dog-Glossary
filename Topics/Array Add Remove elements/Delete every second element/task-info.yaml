@@ -1,0 +1,19 @@
+type: code
+files:
+  - name: main.js
+    visible: true
+    highlight_level: NONE
+    text: |-
+      function deleteEverySecond(){
+          const myArray = ['John', 'Kate', 'Igor', 'Sam', 'Stan', 'William'];
+          // write your code here
+      
+      }
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/24960#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sat, 04 Nov 2023 07:42:26 UTC"
+record: -1
+submission_language: javascript

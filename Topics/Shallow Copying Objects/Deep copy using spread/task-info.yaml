@@ -1,0 +1,16 @@
+type: code
+files:
+  - name: main.js
+    visible: true
+    highlight_level: NONE
+    text: |-
+      const man = { name: 'John', mother: { name: 'Bella'} };
+      const shallowCopy = //write your code here
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/27916#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Thu, 26 Oct 2023 08:22:17 UTC"
+record: -1
+submission_language: javascript

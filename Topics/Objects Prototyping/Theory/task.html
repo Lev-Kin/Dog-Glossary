@@ -1,0 +1,97 @@
+<h2>Objects Prototyping</h2>
+<div class="step-text">
+<p>You are already well-acquainted with object properties and methods. Now, it's time to create more flexible and dynamic objects using prototyping. <strong>Object prototyping</strong>, by definition, is a practice that involves generating reusable object templates known as <strong>prototypes</strong>. Just like regular objects, a prototype in JavaScript is also an object. In this context, prototypes are like parent objects that keep common things, like properties and methods, to pass them down to their child objects. In other words, the child objects can get these properties and methods from their prototypes and use them. But why do we need such a mechanism?</p>
+<h5 id="understanding-object-inheritance-and-prototypes">Understanding object inheritance and prototypes</h5>
+<p>Imagine you're at a pizza restaurant, with the menu on your table. You find a pizza that suits your taste, but you want to add extra ingredients for more flavor. Would it be easier to describe the desired pizza from scratch to the waiter, or would it be simpler to start with a similar pizza and just add a few extra ingredients? Most likely, the latter option would be easier, right?</p>
+<p>In JavaScript, <strong>object inheritance</strong> works similarly. It allows us to create new objects based on existing objects, just like customizing a pizza with a base and choosing extra ingredients. Object prototyping, on the other hand, is a special mechanism in JavaScript, that enables inheritance by creating a prototype relationship between a parent object and child objects. This relationship gets its name from those parent objects, which act as templates and are called <strong>prototypes</strong>. Child objects can inherit associated properties and methods from prototypes, while also having their own unique properties.</p>
+<p>In this way, object prototyping simplifies the process of creating new objects by offering a base that can be modified according to preferences. Instead of starting from scratch each time, you can reuse existing code and build upon it, much like customizing a pizza with additional toppings.</p>
+<h5 id="objectprototype">Object.prototype</h5>
+<p>In JavaScript, every object comes with default properties, all of which are inherited from a special object named <code class="language-javascript">Object.prototype</code>, which is the ultimate parent object for all other objects. In your browser's console, when you enter the object's name, appending a "." (period) as an input, you will see a tab with a lineup of properties and methods on top of the object's own properties. Let's check this on an example object:</p>
+<pre><code class="language-javascript">const fairytale = {
+    title: "Snow White and the Seven Dwarfs"
+};</code></pre>
+<p>Here we see that the object <code class="language-javascript">fairytale</code> has only one property of its own, <code class="language-javascript">title</code>. However, when you place a dot notation after <code class="language-javascript">fairytale</code> in the console, you'll see something like that:</p>
+<p><img alt="Properties and methods of the JavaScript object viewed in the browser console: Snow White, title, tab, defineGetter, defineSetter, lookupGetter, lookupSetter, proto, constructor, hasOwnProperty, isPrototypeOf, propertyIsEnumerable, toLocaleString, toString, valueOf" height="280" name="console.png" src="https://ucarecdn.com/74ed4c6d-d69d-4bff-81f2-baccdaf8c734/" width="318"/></p>
+<p>At the top of the list, we see <code class="language-javascript">title</code>, which is the own property of the object <code class="language-javascript">fairytale</code>. Let's set aside the instances that do not start and end with double underscores for now and focus on the remaining ones in the list, starting with <code class="language-javascript">constructor</code>, <code class="language-javascript">hasOwnProperty</code>, and the rest. Interestingly, all of these mentioned instances, except for <code class="language-javascript">title</code>, are actually part of the <code class="language-javascript">Object.prototype</code> in JavaScript and can be accessed by all other objects.</p>
+<p>So, if the <code class="language-javascript">Object.prototype</code> is the top-level base object, what is its prototype?  In case you were wondering, here's a quirky detail: in JavaScript, the prototype of <code class="language-javascript">Object.prototype</code> is <code class="language-javascript">null</code>.</p>
+<h5 id="the-__proto__-property">The "__proto__" property</h5>
+<p><code class="language-javascript">__proto__</code>is a special property that allows access to and setting of properties of the parent object(s), known as prototype properties. To access the prototype properties of the parent object, you should type the name of the base object as a value next to the <code class="language-javascript">__proto__</code> property.</p>
+<p>Let's take a look at how the <code class="language-javascript">__proto__</code> property interacts with other objects in the source code with the following example:</p>
+<pre><code class="language-javascript">const details = {
+  __proto__: fairytale,
+  mainCharacter: "princess",
+  place: "castle",
+  opening() {
+    console.log(`In "${this.title}", there was a ${this.mainCharacter} living in a ${this.place}.`);
+  }
+};
+
+details.opening(); //In "Snow White and the Seven Dwarfs", there was a princess living in a castle.</code></pre>
+<p>Here's another object named <code class="language-javascript">details</code>. It is evident that <code class="language-javascript">details</code> inherits properties from <code class="language-javascript">fairytale</code> through the <code class="language-javascript">__proto__</code> declaration. So when we call the <code class="language-javascript">opening()</code> method and check the console, we can see that the <code class="language-javascript">title</code> property of the <code class="language-javascript">fairytale</code> object is successfully accessed and set.</p>
+<h5 id="objectcreate">Object.create()</h5>
+<p>It's important to note that while the <code class="language-javascript">__proto__</code> property is widely supported in JavaScript, it was not standardized until ECMAScript 6 (ES6). In ES6, we have a more recommended and standardized option for establishing inheritance and creating new objects in JavaScript, which is the <code class="language-javascript">Object.create()</code> method.</p>
+<p><code class="language-javascript">Object.create()</code> is a static method of the object constructor that allows us to create a new object with a specified prototype object and properties. It provides a way to explicitly define the prototype object for the newly created object. This method is considered a more flexible and low-level approach to prototypal inheritance, as it allows direct manipulation of prototypes and objects.</p>
+<p>Moving forward, we will use <code class="language-javascript">Object.create()</code> to demonstrate examples of prototyping.</p>
+<p>And now, here is the refactored code for prototyping the object <code class="language-javascript">princess</code> using <code class="language-javascript">Object.create()</code>:</p>
+<pre><code class="language-javascript">const details = Object.create(fairytale);
+details.mainCharacter = "princess";
+details.place = "castle";
+details.opening = function() {
+  console.log(`In "${this.title}", there was a ${this.mainCharacter} living in a ${this.place}.`);
+};
+
+details.opening(); //In "Snow White and the Seven Dwarfs", there was a princess living in a castle.</code></pre>
+<p>When using <code class="language-javascript">Object.create()</code>, the syntax changes slightly. You provide the prototype object's name as an argument to <code class="language-javascript">Object.create()</code>, like <code class="language-javascript">Object.create(fairytale)</code> in this case. Then, the properties and methods of the prototype object are assigned individually to the new object using dot notation instead of bracket notation. As in the example above, the name of the <code class="language-javascript">details</code> object is accessed using dot notation as with <code class="language-javascript">details.mainCharacter</code> and <code class="language-javascript">details.place</code>, and the like.</p>
+<h5 id="modifying-prototype-properties">Modifying prototype properties</h5>
+<p>The values of prototype properties in extended objects can be updated by assigning a new value to that specific property. This new value will override the inherited value from the base object.</p>
+<pre><code class="language-javascript">const snowWhite = Object.create(details);
+snowWhite.name = "Snow White";
+snowWhite.enemy = "The Evil Queen";
+snowWhite.place = "forest";
+
+snowWhite.keyInfo = function() {
+    console.log(`${this.name} was forced to escape into a ${this.place} by ${this.enemy}.`);
+};
+
+snowWhite.keyInfo(); // Snow White was forced to escape into a forest by The Evil Queen.</code></pre>
+<p>Here, in this part, the assigned value of the <code class="language-javascript"><samp>place</samp></code> inside <code class="language-javascript">snowWhite</code> will override the inherited value of <code class="language-javascript">details</code>from <code class="language-javascript">castle</code> to <code class="language-javascript">forest</code>.</p>
+<p>Optionally, if you want to update prototype properties in child objects created via the <code class="language-javascript">__proto__</code> property, you can modify the value of that specific property inside the extended object. The result will be the same.</p>
+<pre><code class="language-javascript">const snowWhite = {
+  __proto__: details,
+  name: "Snow White",
+  enemy: "The Evil Queen",
+  place: "forest",
+
+  keyInfo() {
+    console.log(`${this.name} was forced to escape into a ${this.place} by ${this.enemy}.`);
+  }
+};
+
+snowWhite.keyInfo(); // Snow White was forced to escape into a forest by The Evil Queen.</code></pre>
+<h5 id="prototype-chains">Prototype chains</h5>
+<p>When one prototype object is set as the prototype of another prototype object, a hierarchical inheritance structure is also established across objects. In the following code, <code class="language-javascript">snowWhite</code> inherits a property from <code class="language-javascript">details</code> along with <code class="language-javascript">fairytale</code>. Additionally, <code class="language-javascript">details</code> also inherits values from <code class="language-javascript">fairytale</code>. This results in a chain of prototype objects starting from the immediate prototypes and extending all the way up the chain. It's worth mentioning that prototyping built-in properties from <code class="language-javascript">Object.prototype</code> are also involved in each step of the chain.</p>
+<pre><code class="language-javascript">const fairytale = {
+  title: "Snow White and the Seven Dwarfs"
+};
+
+const details = Object.create(fairytale);
+details.mainCharacter = "princess";
+details.place = "castle";
+
+details.opening = function() {
+  console.log(`In "${this.title}", there was a ${this.mainCharacter} living in a ${this.place}.`);
+};
+
+const snowWhite = Object.create(details);
+snowWhite.name = "Snow White";
+snowWhite.enemy = "The Evil Queen";
+snowWhite.place = "forest";
+
+snowWhite.keyInfo = function() {
+  console.log(`${this.name} was forced to escape into a ${this.place} by ${this.enemy}.`);
+};
+
+snowWhite.keyInfo(); // Snow White was forced to escape into a forest by The Evil Queen.</code></pre>
+<h5 id="conclusion">Conclusion</h5>
+<p>Prototyping is a useful mechanism in JavaScript for creating flexible and reusable object blueprints. Prototypes act as base functions for multiple instance objects. Every JavaScript object has an ancestor object called <code class="language-javascript">Object.prototype</code>. Inheritance of properties can be achieved through the <code class="language-javascript">__proto__</code> property, or even better, using <code class="language-javascript">Object.create()</code>. Properties can be manipulated by assigning new values to those properties within child objects. By setting one prototype object as the prototype of another, we can construct prototype chains that create a hierarchical inheritance structure among objects.</p>
+</div>

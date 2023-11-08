@@ -1,0 +1,23 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Private static methods can be invoked directly on the class and provide common
+      operations for the class as a whole
+  - text: "By keeping certain data private and static, you prevent direct external access\
+    \ and manipulation, ensuring that the data remains secure and controlled within\
+    \ the class"
+  - text: Private static members help to prevent unwanted modifications or dependencies
+      on internal details
+  - text: Private static members allow you to hide implementation details and internal
+      data from external access
+files:
+  - name: main.js
+    visible: true
+    text: |+
+      // You can experiment here, it won’t be checked
+    
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/31171#comment
+status: Unchecked
+record: -1
+local_check: false

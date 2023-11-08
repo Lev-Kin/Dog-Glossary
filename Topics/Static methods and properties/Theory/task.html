@@ -1,0 +1,137 @@
+<h2>Static methods and properties</h2>
+<div class="step-text">
+<p>There are often scenarios where certain data or functionality needs to be shared among all instances of a class. This is where static properties and methods come into play. This type of method allows us to determine functions that are not specific to instances, but rather apply to the entire class.</p>
+<p>In this topic, we will explore how to define and use static properties and methods in JavaScript, and understand how to distinct them from instance members.</p>
+<h5 id="defining-and-accessing-a-static-method-and-property">Defining and accessing a static method and property</h5>
+<p>A <strong>static method</strong> in JavaScript is a method that is associated with the class itself, rather than with any particular instance of the class. It is not accessible through individual objects created from the class, but rather through the class name directly. </p>
+<p>To declare a method or a property as static, precede it with the keyword <code class="language-javascript">static</code>: </p>
+<pre><code class="language-javascript">class NewClass {
+  static classProperty = "I'll be displayed after invoking classMethod";
+  static classMethod () {
+    console.log(this.classProperty);
+  }
+}</code></pre>
+<p>Static members are accessed through the class name directly:</p>
+<pre><code class="language-javascript">console.log(NewClass.classProperty);	//I'll be displayed after invoking classMethod
+console.log(NewClass.classMethod());	//I'll be displayed after invoking classMethod</code></pre>
+<p>Since a static method refers to a class as a whole and not to an object, we can't refer to non-static members in it using <code class="language-javascript">this</code>. If we want to access instance members in a static method, we can define a parameter in the method through which an object will be passed:</p>
+<pre><code class="language-javascript">class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  static printInfo(person) {                   //passing the object as an argument
+    console.log(person.name, person.age);    //accessing its attributes
+  }
+}
+const john = new Person("John", 68);
+
+Person.printInfo(john);                
+//Output: John 68
+</code></pre>
+<p>The output will print values of the object <code class="language-javascript">john</code>. That's how you can use a static method with an instance.</p>
+<h5 id="use-cases-of-static-members">Use cases of static members</h5>
+<p>Static methods and properties can be used to manage shared data among instances. Suppose you have a class that requires: </p>
+<ul>
+<li>
+<p>a utility function which is related to the class as a whole, and</p>
+</li>
+<li>
+<p>certain attributes that remain constant throughout the application.</p>
+</li>
+</ul>
+<p>You can define them as static methods/properties. These properties can be accessed and used by all instances of the class without the need for duplication.</p>
+<pre><code class="language-javascript">class Person {
+  static retirementAge = 65;          //the value representing the constant of the class
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  static isRetired(person) {          //the method which works with an instance using the constant
+    if (person.age &gt; this.retirementAge) {
+      return true;
+    } else {
+      return false;
+    }       
+  }
+}
+const john = new Person("John", 68);
+
+console.log(Person.retirementAge);      //accessing the constant value stored in the static property
+// Output: 65
+console.log(Person.isRetired(john));    //invoking the static method to which the object is passed
+// Output: true</code></pre>
+<p>Static properties can also be used to maintain counters or trackers that keep track of data across all instances of a class. For example, if you need to count adults who are required to renew their passport, you can use a static property to track the counter whenever a new instance is created.</p>
+<pre><code class="language-javascript">class Person {
+  static amount = 0;                  //the value representing a counter of created instances
+  constructor(name, age) {
+     this.name = name;
+     this.age = age;
+     Person.amount++;
+  }
+}
+const john = new Person("John", 68);    //creating a new instance of the class Person
+console.log(Person.amount);	            
+// Output: 1
+
+const kim = new Person("Kim", 37);
+console.log(Person.amount);             //the counter's value has changed
+// Output: 2</code></pre>
+<p>With the help of static properties and methods, we can achieve cleaner and more organized code, as well as optimize performance by avoiding unnecessary instance creation.</p>
+<h5 id="inheritance-of-static-members-by-child-classes">Inheritance of static members by child classes</h5>
+<p>When a child class extends a parent class, it inherits not only the instance methods and properties, but also the static methods and properties. This means that the child class can directly access and invoke the static methods and properties defined in the parent class without the need for redefining them.</p>
+<pre><code class="language-javascript">class Person {
+  static retirementAge = 65;            //the static value representing the constant of the class
+  constructor(name, age) {
+    this.name = name;
+      this.age = age;
+  }
+  static calculateRestYears(person) {   
+    if (this.retirementAge &gt; person.age) {          //accessing static and object's properties
+      const restYears = this.retirementAge - person.age;
+      console.log(`${restYears} years to retirement.`)
+    } else {
+      console.log("Already retired.")
+    }
+  }
+}
+class Teacher extends Person {              //child class will inherit its parent's static members
+  constructor(name, age, major) {
+    super(name, age);
+    this.major = major;
+  }
+}
+const kim = new Teacher("Kim", 37, "Music");
+console.log(Teacher.calculateRestYears(kim));        //invoking a static method to the child class
+// Output: 28 years to retirement.</code></pre>
+<p>The method <code class="language-javascript">calculateRestYears</code> calculates the difference between the new person's age and the constant age of retirement, that is common to the whole class of persons. As <code class="language-javascript">calculateRestYears</code> is a static method, it accesses another static member <code class="language-javascript">retirementAge</code> with <code class="language-javascript">this</code> keyword, and any object of the class or its child class will be accessed as an instance.</p>
+<h5 id="private-static-members">Private static members</h5>
+<p>Like regular properties and methods, static fields and methods can be private. Such members are accessible only from other static methods of the class:</p>
+<pre><code class="language-javascript">class Person {
+  static #retirementAge = 65;            //private static field
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  static isRetired(person) {             //static method uses the private static property
+    if (person.age &gt; this.#retirementAge) {
+      return true;
+    } else {
+      return false;
+    }       
+  }
+}
+const john = new Person("John", 68);
+
+console.log(Person.#retirementAge);        //Error: property is not accessible outside the class
+console.log(Person.isRetired(john));       
+// Output: true</code></pre>
+<p>The private static member can't be used outside the class, as seen in the first log. Static method <code class="language-javascript">isRetired</code> takes the object as a parameter and can be accessed outside the class.</p>
+<h5 id="conclusion">Conclusion</h5>
+<ul>
+<li>Static properties and methods are accessed directly on the class, while instance properties and methods are accessed on instances created from the class. An attempt to access or modify static properties through instances will result in with an error. </li>
+<li>They are especially useful when dealing with operations or functionality which are not tied to specific instances but are relevant to the class as a whole, like keeping shared data and methods associating with it.</li>
+<li>Child classes inherit the static methods and properties defined in the parent class, so they can be accessed and used without the need to redefine them.</li>
+<li>Private static members can be helpful when you want to encapsulate data or functionality that you only want accessed within the class itself.</li>
+</ul>
+</div>

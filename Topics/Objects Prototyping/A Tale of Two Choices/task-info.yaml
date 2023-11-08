@@ -1,0 +1,26 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: "<code>Object.create()</code> is the only option that enables modification\
+    \ of prototype properties, whereas the <code>__proto__</code> property does not."
+  - text: "The <code>__proto__</code> property, although widely supported, was not standardized\
+    \ until ECMAScript 6 and is considered a non-standard feature."
+  - text: Overriding inherited properties is impossible when creating child objects
+      with <code>__proto__</code>.
+  - text: " <code>__proto__</code> property can only be used for single-level inheritance,\
+    \ while using <code>Object.create()</code> you can create complex inheritance\
+    \ structures."
+  - text: "With <code>Object.create()</code>, you can explicitly define the prototype\
+    \ object for the newly created object and have direct control over the prototype\
+    \ chain."
+files:
+  - name: main.js
+    visible: true
+    text: |+
+      // You can experiment here, it won’t be checked
+    
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30512#comment
+status: Solved
+record: -1
+local_check: false
